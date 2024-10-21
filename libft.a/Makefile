@@ -2,13 +2,13 @@
 NAME = libft.a
 
 # Flags de compilación
-CC = cc
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-# Archivos fuente
-SRC = ft_isalpha.c ft_strlen.c ft_memset.c main.c# Añade aquí el resto de tus archivos .c
+# Archivos fuente que quieres compilar
+SRC = ft_isalpha.c ft_strlen.c ft_isdigit.c #main.c
 
-# Archivos objeto (se generan a partir de los .c)
+# Archivos objeto
 OBJ = $(SRC:.c=.o)
 
 # Regla principal para crear la librería
@@ -19,7 +19,7 @@ $(NAME): $(OBJ)
 
 # Limpia los archivos objeto
 clean:
-	rm -f $(OBJ)
+	del /f $(OBJ)
 
 # Limpia los archivos objeto y la librería
 fclean: clean
