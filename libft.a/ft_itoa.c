@@ -27,35 +27,35 @@ static int	get_num_length(int n)
 	return (len);
 }
 
-static void	fill_str(char *str, int n, int len)
+static void	convert_to_string(char *str, unsigned int num, int len)
 {
 	str[len] = '\0';
-	if (n < 0)
+	while (num > 0)
 	{
-		str[0] = '-';
-		n = -n;
-	}
-	while (len-- > 0 && n != 0)
-	{
-		str[len] = (n % 10) + '0';
-		n /= 10;
+		str[--len] = (num % 10) + '0';
+		num /= 10;
 	}
 }
 
 char	*ft_itoa(int n)
 {
-	int		len;
-	char	*str;
+	char			*str;
+	int				len;
+	unsigned int	num;
 
-	if (n == -2147483648)
-		return (ft_strdup("-2147483648"));
+	if (n == 0)
+		return (ft_strdup("0"));
 	len = get_num_length(n);
-	str = (char *)malloc(len + 1);
+	str = (char *)malloc((len + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
-	if (n == 0)
-		str[0] = '0';
+	if (n < 0)
+	{
+		str[0] = '-';
+		num = -n;
+	}
 	else
-		fill_str(str, n, len);
+		num = n;
+	convert_to_string(str, num, len);
 	return (str);
 }

@@ -14,9 +14,10 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	const char		*last_occurrence = NULL;
+	const char		*last_occurrence;
 	unsigned char	uc;
 
+	last_occurrence = NULL;
 	uc = (unsigned char)c;
 	while (*s)
 	{
