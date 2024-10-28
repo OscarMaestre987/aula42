@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omaestre <omaestre@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,12 +12,21 @@
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	size_t	i;
+	unsigned char	uc1;
+	unsigned char	uc2;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	if (n == 0)
+		return (0);
+	while (n-- > 0)
+	{
+		uc1 = (unsigned char) *s1++;
+		uc2 = (unsigned char) *s2++;
+		if (uc1 != uc2)
+			return (uc1 - uc2);
+		if (uc1 == '\0')
+			break ;
+	}
+	return (0);
 }

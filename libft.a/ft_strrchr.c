@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omaestre <omaestre@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,12 +12,17 @@
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+char	*ft_strrchr(const char *s, int c)
 {
-	size_t	i;
+	const char	*last_occurrence = NULL;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	while (*s)
+	{
+		if (*s == (char)c)
+			last_occurrence = s;
+		s++;
+	}
+	if (c == 0)
+		return ((char *)s);
+	return ((char *)last_occurrence);
 }
