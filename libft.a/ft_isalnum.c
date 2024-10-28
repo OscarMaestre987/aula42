@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: omaestre <omaestre@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/21 12:45:00 by omaestre          #+#    #+#             */
-/*   Updated: 2024/10/21 12:50:00 by omaestre         ###   ########.fr       */
+/*   Created: 2024/10/28 10:45:00 by omaestre          #+#    #+#             */
+/*   Updated: 2024/10/28 10:50:00 by omaestre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isdigit(int c)
+int	ft_isalnum(int c)
 {
 	if (c >= '0' && c <= '9')
+	{
 		return (1);
-	return (0);
+	}
+	if (c >= 'A' && c <= 'Z')
+	{
+		return (1);
+	}
+	if (c >= 'a' && c <= 'z')
+	{
+		return (1);
+	}
+	else
+		return (0);
 }

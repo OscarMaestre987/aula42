@@ -6,7 +6,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 # Archivos fuente que quieres compilar
-SRC = ft_isalpha.c ft_strlen.c ft_isdigit.c #main.c
+SRC = ft_isalpha.c ft_strlen.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c#main.c
 
 # Archivos objeto
 OBJ = $(SRC:.c=.o)
