@@ -15,74 +15,77 @@
 static size_t	count_words(const char *s, char c)
 {
 	size_t	count;
-	int		is_word;
+	int		in_word;
 
 	count = 0;
-	is_word = 0;
+	in_word = 0;
 	while (*s)
 	{
-		if (*s != c && !is_word)
+		if (*s != c && !in_word)
 		{
-			is_word = 1;
+			in_word = 1;
 			count++;
 		}
 		else if (*s == c)
-			is_word = 0;
+			in_word = 0;
 		s++;
 	}
 	return (count);
 }
 
-static char	*extract_word(const char *s, char c, size_t *len)
-{
-	const char	*start = s;
-
-	while (*s && *s != c)
-		s++;
-	*len = s - start;
-	if (*len > 0)
-		return (ft_substr(start, 0, *len));
-	return (NULL);
-}
-
 static void	free_all(char **array, size_t i)
 {
-	while (i--)
+	while (i > 0)
+	{
+		i--;
 		free(array[i]);
+	}
 	free(array);
 }
 
-static const char	*skip_delimiter(const char *s, char c)
+static int	fill_array(char **array, const char *s, char c)
 {
-	while (*s == c)
-		s++;
-	return (s);
+	size_t	i;
+	size_t	len;
+
+	i = 0;
+	while (*s)
+	{
+		while (*s == c)
+			s++;
+		if (*s == '\0')
+			break ;
+		len = 0;
+		while (s[len] && s[len] != c)
+			len++;
+		array[i] = ft_substr(s, 0, len);
+		if (!array[i])
+		{
+			free_all(array, i);
+			return (0);
+		}
+		s += len;
+		i++;
+	}
+	array[i] = NULL;
+	return (1);
 }
 
 char	**ft_split(char const *s, char c)
 {
 	char	**array;
-	size_t	i;
-	size_t	len;
+	size_t	words;
 
-	i = 0;
-	len = 0;
 	if (!s)
 		return (NULL);
-	array = (char **)malloc((count_words(s, c) + 1) * sizeof(char *));
+	words = count_words(s, c);
+	array = (char **)malloc((words + 1) * sizeof(char *));
 	if (!array)
 		return (NULL);
-	while (i < count_words(s, c))
+	if (!fill_array(array, s, c))
 	{
-		s = skip_delimiter(s, c);
-		array[i] = extract_word(s, c, &len);
-		if (!array[i])
-		{
-			free_all(array, i);
-			return (NULL);
-		}
-		s += len;
+		free(array);
+		return (NULL);
 	}
-	array[count_words(s, c)] = NULL;
 	return (array);
 }
