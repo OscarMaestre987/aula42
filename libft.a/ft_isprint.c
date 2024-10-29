@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omaestre <omaestre@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: omaestre <omaestre@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 12:45:00 by omaestre          #+#    #+#             */
-/*   Updated: 2024/10/21 12:50:00 by omaestre         ###   ########.fr       */
+/*   Updated: 2024/10/29 11:43:08 by omaestre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

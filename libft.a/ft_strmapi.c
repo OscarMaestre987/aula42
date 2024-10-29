@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omaestre <omaestre@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: omaestre <omaestre@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 10:45:00 by omaestre          #+#    #+#             */
-/*   Updated: 2024/10/21 10:50:00 by omaestre         ###   ########.fr       */
+/*   Updated: 2024/10/29 11:40:43 by omaestre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
