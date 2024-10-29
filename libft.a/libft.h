@@ -6,7 +6,7 @@
 /*   By: omaestre <omaestre@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 10:45:00 by omaestre          #+#    #+#             */
-/*   Updated: 2024/10/29 11:40:13 by omaestre         ###   ########.fr       */
+/*   Updated: 2024/10/29 12:19:02 by omaestre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 # include <stddef.h>
 # include <stdlib.h>
-# include <unistd.h> 
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdint.h>
 
 int		ft_isalpha(int c);
 size_t	ft_strlen(const char *s);
