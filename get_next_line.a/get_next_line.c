@@ -11,100 +11,99 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+char	*get_new_saved(char **saved, char *new_line, size_t line_len)
 {
-	size_t	src_len;
+	char	*new_saved;
+	char	*line;
 	size_t	i;
 
-	src_len = 0;
-	while (src[src_len])
-		src_len++;
-	if (dstsize == 0)
-		return (src_len);
+	line = (char *)malloc(sizeof(char) * (line_len + 1));
+	if (line == NULL)
+		return (free_str(saved));
 	i = 0;
-	while (src[i] && i < (dstsize - 1))
+	while (i < line_len)
 	{
-		dst[i] = src[i];
+		line[i] = (*saved)[i];
 		i++;
 	}
-	dst[i] = '\0';
-	return (src_len);
-}
-
-static char	*update_remainder(char *remainder, char *buf)
-{
-	char	*temp;
-
-	if (!remainder)
-		return (ft_strdup(buf));
-	temp = ft_strjoin(remainder, buf);
-	free(remainder);
-	return (temp);
-}
-
-static int	read_from_fd(int fd, char **remainder)
-{
-	char	buf[BUFFER_SIZE + 1];
-	ssize_t	bytes_read;
-
-	bytes_read = read(fd, buf, BUFFER_SIZE);
-	while ((bytes_read) > 0)
+	line[i] = '\0';
+	if (*(new_line + 1) != '\0')
 	{
-		buf[bytes_read] = '\0';
-		*remainder = update_remainder(*remainder, buf);
-		bytes_read = read(fd, buf, BUFFER_SIZE);
-	}
-	if (bytes_read == 0 && *remainder && **remainder != '\0')
-		return (1);
-	return (bytes_read);
-}
-
-static char	*extract_line(char **remainder)
-{
-	char	*line_end;
-	char	*line;
-
-	line_end = ft_strchr(*remainder, '\n');
-	if (line_end)
-	{
-		*line_end = '\0';
-		line = ft_strjoin(*remainder, "\n");
-		ft_strlcpy(*remainder, line_end + 1, ft_strlen(line_end + 1) + 1);
+		new_saved = str_dup(new_line + 1);
+		if (new_saved == NULL)
+			return (free_str(&line), free_str(saved));
 	}
 	else
-	{
-		if (!**remainder)
-		{
-			free(*remainder);
-			*remainder = NULL;
-			return (NULL);
-		}
-		line = ft_strdup(*remainder);
-		free(*remainder);
-		*remainder = NULL;
-	}
+		new_saved = NULL;
+	free_str(saved);
+	*saved = new_saved;
 	return (line);
+}
+
+char	*extract_line(char **saved)
+{
+	char	*new_line;
+	char	*line;
+
+	new_line = str_chr(*saved, '\n');
+	if (new_line != NULL)
+		return (get_new_saved(saved, new_line, new_line - *saved + 1));
+	if ((*saved)[0] == '\0')
+		return (free_str(saved));
+	line = *saved;
+	*saved = NULL;
+	return (line);
+}
+
+char	*read_until_eol_eof(int fd, char **saved, char **buffer)
+{
+	char		*temp;
+	ssize_t		bytes_read;
+	char		*compared;
+
+	bytes_read = 1;
+	compared = *saved;
+	while (bytes_read > 0 && str_chr(compared, '\n') == NULL)
+	{
+		bytes_read = read(fd, *buffer, BUFFER_SIZE);
+		if (bytes_read < 0)
+			return (free_str(saved), free_str(buffer));
+		if (bytes_read > 0)
+		{
+			(*buffer)[bytes_read] = '\0';
+			compared = *buffer;
+			temp = str_join(*saved, *buffer);
+			if (temp == NULL)
+				return (free_str(saved), free_str(buffer));
+			free_str(saved);
+			*saved = temp;
+		}
+	}
+	return (*saved);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*remainder;
-	int			bytes_read;
+	static char	*saved;
+	char		*buffer;
+	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
-	{
 		return (NULL);
-	}
-	if (!remainder)
-		remainder = ft_strdup("");
-	bytes_read = read_from_fd(fd, &remainder);
-	if (bytes_read == -1 || (bytes_read == 0 && (!remainder || !*remainder)))
+	if (saved == NULL)
 	{
-		free(remainder);
-		remainder = NULL;
-		return (NULL);
+		saved = str_dup("");
+		if (saved == NULL)
+			return (NULL);
 	}
-	return (extract_line(&remainder));
+	buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (buffer == NULL)
+		return (free_str(&saved));
+	buffer[BUFFER_SIZE] = '\0';
+	if (read_until_eol_eof(fd, &saved, &buffer) == NULL)
+		return (free_str(&buffer));
+	free_str(&buffer);
+	line = extract_line(&saved);
+	return (line);
 }
