@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oscarmaestre <oscarmaestre@student.42.f    +#+  +:+       +#+        */
+/*   By: omaestre <omaestre@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 10:59:20 by oscarmaestr       #+#    #+#             */
-/*   Updated: 2024/12/08 13:01:55 by oscarmaestr      ###   ########.fr       */
+/*   Updated: 2025/01/10 00:50:44 by omaestre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,10 @@ int	print_int(va_list args);
 int	print_unsigned(va_list args);
 int	print_hex(va_list args, char format);
 int	print_percent(void);
+
+int	print_number(int n);
+int	print_number_unsigned(unsigned int n);
+int	print_hexadecimal(unsigned int n, char format);
+int	print_hexadecimal_p(uintptr_t n, char format);
 
 #endif

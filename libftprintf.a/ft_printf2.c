@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oscarmaestre <oscarmaestre@student.42.f    +#+  +:+       +#+        */
+/*   By: omaestre <omaestre@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 10:58:40 by oscarmaestr       #+#    #+#             */
-/*   Updated: 2024/12/08 13:55:29 by oscarmaestr      ###   ########.fr       */
+/*   Updated: 2025/01/10 00:51:34 by omaestre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "ft_printf_aux.h"
 
 int	print_unsigned(va_list args)
 {
