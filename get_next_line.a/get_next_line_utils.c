@@ -6,11 +6,11 @@
 /*   By: oscarmaestre <oscarmaestre@student.42.f    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 12:16:17 by oscarmaestr       #+#    #+#             */
-/*   Updated: 2024/12/09 12:27:26 by oscarmaestr      ###   ########.fr       */
+/*   Updated: 2024/12/23 20:31:30 by oscarmaestr      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_utils.h"
+#include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
 {
